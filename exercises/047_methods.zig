@@ -64,6 +64,10 @@ const HeatRay = struct {
     pub fn zap(self: HeatRay, alien: *Alien) void {
         alien.health -= if (self.damage >= alien.health) alien.health else self.damage;
     }
+
+    pub fn printAnything(_: HeatRay) void {
+        std.debug.print("Nothings there", .{});
+    }
 };
 
 pub fn main() void {
@@ -80,6 +84,8 @@ pub fn main() void {
     var aliens_alive = aliens.len;
     const heat_ray = HeatRay{ .damage = 7 }; // We've been given a heat ray weapon.
 
+    heat_ray.printAnything();
+
     // We'll keep checking to see if we've killed all the aliens yet.
     while (aliens_alive > 0) {
         aliens_alive = 0;
@@ -88,7 +94,7 @@ pub fn main() void {
         for (&aliens) |*alien| {
 
             // *** Zap the alien with the heat ray here! ***
-            ???.zap(???);
+            heat_ray.zap(alien);
 
             // If the alien's health is still above 0, it's still alive.
             if (alien.health > 0) aliens_alive += 1;
