@@ -24,13 +24,13 @@ const std = @import("std");
 
 pub fn main() void {
     var num1: u8 = 5;
-    var num1_pointer: *u8 = &num1;
+    const num1_pointer: *u8 = &num1;
 
     var num2: u8 = undefined;
 
     // Please make num2 equal 5 using num1_pointer!
     // (See the "cheatsheet" above for ideas.)
-    num2 = ???;
+    num2 = num1_pointer.*;
 
     std.debug.print("num1: {}, num2: {}\n", .{ num1, num2 });
 }
