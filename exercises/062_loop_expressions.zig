@@ -49,6 +49,12 @@ pub fn main() void {
         if (lang.len == 3) break lang;
     } else langs[5];
 
+    const four: u8 = while (true) {
+        break 4;
+    };
+
+    print("four is {d}",.{four});
+
     if (current_lang) |cl| {
         print("Current language: {s}\n", .{cl});
     } else {

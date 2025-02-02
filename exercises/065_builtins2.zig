@@ -66,7 +66,7 @@ pub fn main() void {
 
     // This determines a "peer type" from three separate
     // references (they just happen to all be the same object).
-    const Type1 = @TypeOf(narcissus, narcissus.me.*, narcissus.myself.*);
+    const Type1 = @TypeOf(1,2,3,4);
 
     // Oh dear, we seem to have done something wrong when calling
     // this function. We called it as a method, which would work
@@ -76,11 +76,13 @@ pub fn main() void {
     // difference!
     const Type2 = Narcissus.fetchTheMostBeautifulType();
 
+    print("Test for Test2 : {s}\n", .{@typeName(Type1)});
+
     narcissus.printAnything();
 
     // Now we print a pithy statement about Narcissus.
     print("A {s} loves all {s}es. ", .{
-        maximumNarcissism(Type1),
+        @typeName(Type1),
         maximumNarcissism(Type2),
     });
 

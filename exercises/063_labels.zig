@@ -109,6 +109,8 @@ pub fn main() !void {
         // Now look at each required ingredient for the Food...
         for (food.requires, 0..) |required, required_ingredient| {
 
+            print("test {d}!\n", .{required_ingredient}); 
+
             // This ingredient isn't required, so skip it.
             if (!required) continue;
 

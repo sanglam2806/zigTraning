@@ -192,8 +192,8 @@ const TripItem = union(enum) {
             // Oops! The hermit forgot how to capture the union values
             // in a switch statement. Please capture both values as
             // 'p' so the print statements work!
-            .place => print("{s}", .{self.name}),
-            .path => print("--{}->", .{self.dist}),
+            .place => |P| print("{s}", .{P.name}),
+            .path => |P| print("--{}->", .{P.dist}),
         }
     }
 };
@@ -255,7 +255,7 @@ const HermitsNotebook = struct {
             // dereference and optional value "unwrapping" look
             // together. Remember that you return the address with the
             // "&" operator.
-            if (place == entry.*.?.place) return entry;
+            if (place == entry.*.?.place) return &entry.*.?;
             // Try to make your answer this long:__________;
         }
         return null;
@@ -273,7 +273,7 @@ const HermitsNotebook = struct {
     // distance) than the one we'd noted before. If it is, we
     // overwrite the old entry with the new one.
     fn checkNote(self: *HermitsNotebook, note: NotebookEntry) void {
-        var existing_entry = self.getEntry(note.place);
+        const existing_entry = self.getEntry(note.place);
 
         if (existing_entry == null) {
             self.entries[self.end_of_entries] = note;
@@ -309,7 +309,7 @@ const HermitsNotebook = struct {
     //
     // Looks like the hermit forgot something in the return value of
     // this function. What could that be?
-    fn getTripTo(self: *HermitsNotebook, trip: []?TripItem, dest: *Place) void {
+    fn getTripTo(self: *HermitsNotebook, trip: []?TripItem, dest: *Place) !void {
         // We start at the destination entry.
         const destination_entry = self.getEntry(dest);
 
@@ -386,7 +386,7 @@ pub fn main() void {
     // "start" entry we just added) until we run out, at which point
     // we'll have checked every reachable Place.
     while (notebook.hasNextEntry()) {
-        var place_entry = notebook.getNextEntry();
+        const place_entry = notebook.getNextEntry();
 
         // For every Path that leads FROM the current Place, create a
         // new note (in the form of a NotebookEntry) with the
