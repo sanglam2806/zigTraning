@@ -7,7 +7,7 @@
 // doing this work.
 //
 // An 'inline for' is performed at compile time, allowing you to
-// programatically loop through a series of items in situations
+/// programatically loop through a series of items in situations
 // like those mentioned above where a regular runtime 'for' loop
 // wouldn't be allowed:
 //
@@ -40,7 +40,7 @@ pub fn main() void {
 
     const fields = @typeInfo(Narcissus).Struct.fields;
 
-    ??? {
+    inline for(fields) |field| {
         if (field.type != void) {
             print(" {s}", .{field.name});
         }
