@@ -46,7 +46,7 @@ pub fn main() void {
     var nums = [_:0]u32{ 1, 2, 3, 4, 5, 6 };
 
     // And here's a zero-terminated many-item pointer:
-    var ptr: [*:0]u32 = &nums;
+    const ptr: [*:0]u32 = &nums;
 
     // For fun, let's replace the value at position 3 with the
     // sentinel value 0. This seems kind of naughty.
@@ -82,7 +82,7 @@ fn printSequence(my_seq: anytype) void {
             print("Array:", .{});
 
             // Loop through the items in my_seq.
-            for (???) |s| {
+            for (my_seq) |s| {
                 print("{}", .{s});
             }
         },
@@ -94,7 +94,7 @@ fn printSequence(my_seq: anytype) void {
             // Loop through the items in my_seq until we hit the
             // sentinel value.
             var i: usize = 0;
-            while (??? != my_sentinel) {
+            while (my_seq[i] != my_sentinel) {
                 print("{}", .{my_seq[i]});
                 i += 1;
             }
