@@ -18,10 +18,10 @@ const print = @import("std").debug.print;
 pub fn main() void {
     // Again, we've coerced the sentinel-terminated string to a
     // many-item pointer, which has no length or sentinel.
-    const data: [*]const u8 = "Weird Data!";
+    const data: [*]const u8 = "Weird Data! And I add 0 into it";
 
     // Please cast 'data' to 'printable':
-    const printable: [*:0]const u8 = ???;
+    const printable: [*:0]const u8 = @ptrCast(data);
 
     print("{s}\n", .{printable});
 }

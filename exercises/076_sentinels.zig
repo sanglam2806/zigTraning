@@ -43,14 +43,14 @@ const sentinel = @import("std").meta.sentinel;
 
 pub fn main() void {
     // Here's a zero-terminated array of u32 values:
-    var nums = [_:0]u32{ 1, 2, 3, 4, 5, 6 };
+    var nums = [_:4]u32{ 1, 2, 3, 4, 5, 6 };
 
     // And here's a zero-terminated many-item pointer:
-    const ptr: [*:0]u32 = &nums;
+    const ptr: [*:4]u32 = &nums;
 
     // For fun, let's replace the value at position 3 with the
     // sentinel value 0. This seems kind of naughty.
-    nums[3] = 0;
+    nums[2] = 0;
 
     // So now we have a zero-terminated array and a many-item
     // pointer that reference the same data: a sequence of
@@ -73,6 +73,8 @@ pub fn main() void {
 // them!
 fn printSequence(my_seq: anytype) void {
     const my_typeinfo = @typeInfo(@TypeOf(my_seq));
+
+    print("type of test {}\n", .{@TypeOf(my_seq)});
 
     // The TypeInfo contained in my_type is a union. We use a
     // switch to handle printing the Array or Pointer fields,
