@@ -96,7 +96,7 @@ const Insect = union(enum) {
 };
 
 pub fn main() !void {
-    var my_insects = [_]Insect{
+    const my_insects = [_]Insect{
         Insect{ .ant = Ant{ .still_alive = true } },
         Insect{ .bee = Bee{ .flowers_visited = 17 } },
         Insect{ .grasshopper = Grasshopper{ .distance_hopped = 32 } },
@@ -104,9 +104,14 @@ pub fn main() !void {
 
     std.debug.print("Daily Insect Report:\n", .{});
     for (my_insects) |insect| {
+        std.debug.print("\nthe insect in list :{}\n", .{insect});
         // Almost done! We want to print() each insect with a
         // single method call here.
-        ???
+        switch (insect) {
+            .ant => insect.print(),
+            .bee => insect.print(),
+            .grasshopper => insect.print(),
+        }
     }
 }
 
